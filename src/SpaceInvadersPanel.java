@@ -8,15 +8,15 @@ import javax.swing.Timer;
 
 public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	private Timer gameTimer;
-	private int numClicks;
+	private int n;
 	private int dx = 1;
 	private int dy = 1;
 	private int x;
-	private int y;
+	private int y = 50;
 	
 	public SpaceInvadersPanel(){
 		this.setPreferredSize(new Dimension(1000,800));
-		gameTimer = new Timer(5, this);
+		gameTimer = new Timer(3, this);
 		gameTimer.start();
 	}
 
@@ -31,28 +31,36 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	
 	private void moveEverything() {
 		// TODO Auto-generated method stub
-		numClicks++;
-		if(numClicks %5==0) {
+		n++;
+		if(n %5==0) {
 			x += dx;
-			y += dy;
-		}
-		if(numClicks %500 == 0) {
-			y/=2;
 		}
 	}
 
 	public void checkForCollision(){
-		if(x > this.getWidth() || x < 0){
+		if(x > this.getWidth() - 525 || x < 0){
 			dx *= -1;
-		}
-		if(y > this.getHeight() || y < 0){
-			dy *= -1;
+			y += (this.getHeight()/200);
 		}
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawString(""+numClicks, x, y);
+		for (int i = 0; i < 11; i++){
+			g.drawString("E", x + (50 * i), y);
+		}
+		for (int i = 0; i < 11; i++){
+			g.drawString("E", x + (50 * i), y + 50);
+		}
+		for (int i = 0; i < 11; i++){
+			g.drawString("E", x + (50 * i), y + 100);
+		}
+		for (int i = 0; i < 11; i++){
+			g.drawString("E", x + (50 * i), y + 150);
+		}
+		for (int i = 0; i < 11; i++){
+			g.drawString("E", x + (50 * i), y + 200);
+		}
 	}
 }
