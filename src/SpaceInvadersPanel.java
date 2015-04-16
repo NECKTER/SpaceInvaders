@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Point;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -15,7 +16,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	private int dy = 1;
 	private int x;
 	private int y = 50;
-	private List<int[][]> enemyLocs = new ArrayList<int[][]>();
+	private List<Point> enemyLocs = new ArrayList<Point>();
 	
 	public SpaceInvadersPanel(){
 		this.setPreferredSize(new Dimension(1000,800));
@@ -53,23 +54,23 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		enemyLocs.clear();
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y);
-			enemyLocs.add(new int[x + (50 * i)][y]);
+			enemyLocs.add(new Point(x + (50 * i), y));
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 50);
-			enemyLocs.add(new int[x + (50 * i)][y + 50]);
+			enemyLocs.add(new Point(x + (50 * i), y + 50));
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 100);
-			enemyLocs.add(new int[x + (50 * i)][y + 100]);
+			enemyLocs.add(new Point(x + (50 * i), y + 100));
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 150);
-			enemyLocs.add(new int[x + (50 * i)][y + 150]);
+			enemyLocs.add(new Point(x + (50 * i), y + 150));
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 200);
-			enemyLocs.add(new int[x + (50 * i)][y + 200]);
+			enemyLocs.add(new Point(x + (50 * i), y + 200));
 		}
 	}
 }
