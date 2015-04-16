@@ -61,6 +61,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 				g.drawString("E", x + (50 * i), y);
 				enemyLocs.add(new Point(x + (50 * i), y));
 			}
+			else{
+				enemyLocs.set(unitNum, null);
+			}
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
@@ -68,6 +71,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 50);
 				enemyLocs.add(new Point(x + (50 * i), y + 50));
+			}
+			else{
+				enemyLocs.set(unitNum, null);
 			}
 			unitNum++;
 		}
@@ -77,6 +83,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 				g.drawString("E", x + (50 * i), y + 100);
 				enemyLocs.add(new Point(x + (50 * i), y + 100));
 			}
+			else{
+				enemyLocs.set(unitNum, null);
+			}
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
@@ -85,6 +94,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 				g.drawString("E", x + (50 * i), y + 150);
 				enemyLocs.add(new Point(x + (50 * i), y + 150));
 			}
+			else{
+				enemyLocs.set(unitNum, null);
+			}
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
@@ -92,6 +104,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 200);
 				enemyLocs.add(new Point(x + (50 * i), y + 200));
+			}
+			else{
+				enemyLocs.set(unitNum, null);
 			}
 			unitNum++;
 		}
