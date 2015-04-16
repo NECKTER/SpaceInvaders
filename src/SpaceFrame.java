@@ -23,6 +23,7 @@ public class SpaceFrame extends JFrame implements ActionListener {
 		super("Space Invaders!! ");
 		setLayout(new BorderLayout());
 		createMenus();
+		setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		sip = new SpaceInvadersPanel();
 		this.add(sip);

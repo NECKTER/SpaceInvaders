@@ -105,5 +105,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		enemyAnimation(g);
+		if(!gameTimer.isRunning())g.drawImage(sheet.getTitle(), 100, 100, this.getWidth()-200, this.getHeight()-200, null);
 	}
 }
