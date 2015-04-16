@@ -22,11 +22,14 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		this.setPreferredSize(new Dimension(1000,800));
 		setBackground(Color.black);
 		gameTimer = new Timer(3, this);
-		gameTimer.start();
 		enemyLocs = new Point[55];
 		for(int i = 0; i < 55; i++){
 			enemyLocs[i] = (new Point(1,1));
 		}
+	}
+	
+	public void startGame(){
+		gameTimer.start();
 	}
 
 	@Override
