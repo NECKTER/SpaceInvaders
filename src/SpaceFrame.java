@@ -34,7 +34,7 @@ public class SpaceFrame extends JFrame implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setVisible(true);
 		JMenu fileMenu = new JMenu("File");
-		JMenuItem newItem = new JMenuItem("New");
+		JMenuItem newItem = new JMenuItem("Start");
 		newItem.addActionListener(this);// this allows the JMenuItem called newItem to tell the Frame that someone has chosen "new"
 		fileMenu.add(newItem);
 		menuBar.add(fileMenu);
@@ -46,6 +46,7 @@ public class SpaceFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		sip.startGame();
 	}
 
 }
