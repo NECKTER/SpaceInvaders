@@ -21,7 +21,7 @@ public class SpriteSheet {
 
 	public SpriteSheet() {
 		try {
-			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("SpriteSheet.png"));
+			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/SpriteSheet.png"));
 			System.out.println("Image loaded");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
