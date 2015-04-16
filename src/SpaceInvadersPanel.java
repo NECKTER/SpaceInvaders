@@ -20,6 +20,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		this.setPreferredSize(new Dimension(1000,800));
 		gameTimer = new Timer(3, this);
 		gameTimer.start();
+		for(int i = 0; i < 55; i++){
+			enemyLocs.add(new Point(1,1));
+		}
 	}
 
 	@Override
@@ -54,33 +57,43 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		int unitNum = 0;
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
-			g.drawString("E", x + (50 * i), y);
-			enemyLocs.add(new Point(x + (50 * i), y));
-			unitNum++;
+			if (current != null){ //check if this unit has been shot down
+				g.drawString("E", x + (50 * i), y);
+				enemyLocs.add(new Point(x + (50 * i), y));
+				unitNum++;
+			}
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
-			g.drawString("E", x + (50 * i), y + 50);
-			enemyLocs.add(new Point(x + (50 * i), y + 50));
-			unitNum++;
+			if (current != null){
+				g.drawString("E", x + (50 * i), y + 50);
+				enemyLocs.add(new Point(x + (50 * i), y + 50));
+				unitNum++;
+			}
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
-			g.drawString("E", x + (50 * i), y + 100);
-			enemyLocs.add(new Point(x + (50 * i), y + 100));
-			unitNum++;
+			if (current != null){
+				g.drawString("E", x + (50 * i), y + 100);
+				enemyLocs.add(new Point(x + (50 * i), y + 100));
+				unitNum++;
+			}
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
-			g.drawString("E", x + (50 * i), y + 150);
-			enemyLocs.add(new Point(x + (50 * i), y + 150));
-			unitNum++;
+			if (current != null){
+				g.drawString("E", x + (50 * i), y + 150);
+				enemyLocs.add(new Point(x + (50 * i), y + 150));
+				unitNum++;
+			}
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
-			g.drawString("E", x + (50 * i), y + 200);
-			enemyLocs.add(new Point(x + (50 * i), y + 200));
-			unitNum++;
+			if (current != null){
+				g.drawString("E", x + (50 * i), y + 200);
+				enemyLocs.add(new Point(x + (50 * i), y + 200));
+				unitNum++;
+			}
 		}
 	}
 }
