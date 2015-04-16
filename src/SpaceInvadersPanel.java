@@ -50,7 +50,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		}
 	}
 	
-	private void enemies(Graphics g){
+	private void enemyAnimation(Graphics g){
 		int unitNum = 0;
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
@@ -97,7 +97,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		enemies(g);
-		
+		enemyAnimation(g);
 	}
 }
