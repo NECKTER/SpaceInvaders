@@ -13,7 +13,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	private Timer gameTimer;
 	private int n;
 	private int dx = 1;
-	private int dy = 1;
 	private int x;
 	private int y = 50;
 	private List<Point> enemyLocs = new ArrayList<Point>();
