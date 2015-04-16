@@ -70,7 +70,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawImage(sheet.getEnamy1P2(), x + (50 * i), y + 50, 25, 25, this);
+				g.drawImage(sheet.getEnamy1P1(), x + (50 * i), y + 50, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 50);
 			}
 			unitNum++;
@@ -78,7 +78,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawImage(sheet.getEnamy2P1(), x + (50 * i), y + 100, 25, 25, this);
+				g.drawImage(sheet.getEnamy1P1(), x + (50 * i), y + 100, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 100);
 			}
 			unitNum++;
@@ -86,7 +86,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawImage(sheet.getEnamy2P2(), x + (50 * i), y + 150, 25, 25, this);
+				g.drawImage(sheet.getEnamy1P1(), x + (50 * i), y + 150, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 150);
 			}
 			unitNum++;
@@ -94,7 +94,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawImage(sheet.getEnamy3P1(), x + (50 * i), y + 200, 25, 25, this);
+				g.drawImage(sheet.getEnamy1P1(), x + (50 * i), y + 200, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 200);
 			}
 			unitNum++;
