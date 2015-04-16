@@ -50,26 +50,33 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		List<Point> temp = enemyLocs;
 		enemyLocs.clear();
+		int unitNum = 0;
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y);
 			enemyLocs.add(new Point(x + (50 * i), y));
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 50);
 			enemyLocs.add(new Point(x + (50 * i), y + 50));
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 100);
 			enemyLocs.add(new Point(x + (50 * i), y + 100));
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 150);
 			enemyLocs.add(new Point(x + (50 * i), y + 150));
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y + 200);
 			enemyLocs.add(new Point(x + (50 * i), y + 200));
+			unitNum++;
 		}
 	}
 }
