@@ -29,6 +29,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	}
 	
 	public void startGame(){
+		for(int i = 0; i < 55; i++){
+			enemyLocs[i] = (new Point(1,1));
+		}
 		gameTimer.start();
 	}
 
