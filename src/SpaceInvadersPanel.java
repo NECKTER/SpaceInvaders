@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -5,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,6 +20,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	
 	public SpaceInvadersPanel(){
 		this.setPreferredSize(new Dimension(1000,800));
+		setBackground(Color.black);
 		gameTimer = new Timer(3, this);
 		gameTimer.start();
 		enemyLocs = new Point[55];
