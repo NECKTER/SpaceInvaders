@@ -60,40 +60,40 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 			if (current != null){ //check if this unit has been shot down
 				g.drawString("E", x + (50 * i), y);
 				enemyLocs.add(new Point(x + (50 * i), y));
-				unitNum++;
 			}
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 50);
 				enemyLocs.add(new Point(x + (50 * i), y + 50));
-				unitNum++;
 			}
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 100);
 				enemyLocs.add(new Point(x + (50 * i), y + 100));
-				unitNum++;
 			}
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 150);
 				enemyLocs.add(new Point(x + (50 * i), y + 150));
-				unitNum++;
 			}
+			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
 			Point current = temp.get(unitNum);
 			if (current != null){
 				g.drawString("E", x + (50 * i), y + 200);
 				enemyLocs.add(new Point(x + (50 * i), y + 200));
-				unitNum++;
 			}
+			unitNum++;
 		}
 	}
 }
