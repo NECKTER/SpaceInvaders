@@ -14,7 +14,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	private int dx = 1;
 	private int x;
 	private int y = 50;
-	private Point[] enemyLocs;
+	private Point[] enemyLocs; //fully functional list containing the locations of all of the enemies. you can "destroy" an enemy by simply setting their index in this array to null
 	
 	public SpaceInvadersPanel(){
 		this.setPreferredSize(new Dimension(1000,800));
