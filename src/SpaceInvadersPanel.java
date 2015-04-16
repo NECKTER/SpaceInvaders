@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -54,26 +53,31 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		enemyLocs.clear();
 		int unitNum = 0;
 		for (int i = 0; i < 11; i++){
+			Point current = temp.get(unitNum);
 			g.drawString("E", x + (50 * i), y);
 			enemyLocs.add(new Point(x + (50 * i), y));
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
+			Point current = temp.get(unitNum);
 			g.drawString("E", x + (50 * i), y + 50);
 			enemyLocs.add(new Point(x + (50 * i), y + 50));
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
+			Point current = temp.get(unitNum);
 			g.drawString("E", x + (50 * i), y + 100);
 			enemyLocs.add(new Point(x + (50 * i), y + 100));
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
+			Point current = temp.get(unitNum);
 			g.drawString("E", x + (50 * i), y + 150);
 			enemyLocs.add(new Point(x + (50 * i), y + 150));
 			unitNum++;
 		}
 		for (int i = 0; i < 11; i++){
+			Point current = temp.get(unitNum);
 			g.drawString("E", x + (50 * i), y + 200);
 			enemyLocs.add(new Point(x + (50 * i), y + 200));
 			unitNum++;
