@@ -50,6 +50,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		enemyLocs.clear();
 		for (int i = 0; i < 11; i++){
 			g.drawString("E", x + (50 * i), y);
 			enemyLocs.add(new int[x + (50 * i)][y]);
