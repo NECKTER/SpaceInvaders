@@ -57,6 +57,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	}
 	
 	private void enemyAnimation(Graphics g){
+		g.setColor(Color.GREEN);
 		int unitNum = 0;
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
