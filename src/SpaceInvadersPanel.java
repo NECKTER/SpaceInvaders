@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,6 +16,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	private int x;
 	private int y = 50;
 	private Point[] enemyLocs; //destroy an enemy by setting their index in this array to null
+	private SpriteSheet sheet = new SpriteSheet();
 	
 	public SpaceInvadersPanel(){
 		this.setPreferredSize(new Dimension(1000,800));
@@ -62,7 +62,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawString("E", x + (50 * i), y);
+				g.drawImage(sheet.getEnamy1P1(), x + (50 * i), y, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y);
 			}
 			unitNum++;
@@ -70,7 +70,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawString("E", x + (50 * i), y + 50);
+				g.drawImage(sheet.getEnamy1P2(), x + (50 * i), y + 50, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 50);
 			}
 			unitNum++;
@@ -78,7 +78,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawString("E", x + (50 * i), y + 100);
+				g.drawImage(sheet.getEnamy2P1(), x + (50 * i), y + 100, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 100);
 			}
 			unitNum++;
@@ -86,7 +86,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawString("E", x + (50 * i), y + 150);
+				g.drawImage(sheet.getEnamy2P2(), x + (50 * i), y + 150, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 150);
 			}
 			unitNum++;
@@ -94,7 +94,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < 11; i++){
 			Point current = enemyLocs[unitNum];
 			if (current != null){
-				g.drawString("E", x + (50 * i), y + 200);
+				g.drawImage(sheet.getEnamy3P1(), x + (50 * i), y + 200, 25, 25, this);
 				enemyLocs[unitNum] = new Point(x + (50 * i), y + 200);
 			}
 			unitNum++;
