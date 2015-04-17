@@ -6,7 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
+
+import javax.swing.AbstractAction;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 public class SpaceInvadersPanel extends JPanel implements ActionListener {
@@ -23,8 +26,52 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		setBackground(Color.black);
 		gameTimer = new Timer(3, this);
 		enemyLocs = new Point[55];
+		setUpBindings();
 	}
 
+	private void setUpBindings() {
+		// TODO Auto-generated method stub
+		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "shoot");
+		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "right");
+		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "left");
+		this.getActionMap().put("shoot",
+			new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				launchWeapon();
+			}
+		}
+		);
+		this.getActionMap().put("right",
+			new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				moveRight();
+			}
+		});
+		this.getActionMap().put("left",
+			new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				moveLeft();
+			}
+			
+		});
+	}
+
+	
+	public void launchWeapon(){
+		System.out.println("weapon launched");
+	}
+	
+	public void moveRight(){
+		System.out.println("weapon right");
+	}
+	
+	public void moveLeft(){
+		System.out.println("weapon left");
+	}
+	
 	public void startGame() {
 		for (int i = 0; i < 55; i++) {
 			enemyLocs[i] = (new Point(1, 1));
