@@ -56,6 +56,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void destroyEnemy(int unitNum){
+		enemyLocs[unitNum] = null;
+	}
+	
 	private void enemyAnimation(Graphics g){
 		g.setColor(Color.GREEN);
 		int unitNum = 0;
