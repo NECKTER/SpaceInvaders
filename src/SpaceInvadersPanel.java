@@ -20,6 +20,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int y = 50;
 	private Point[] enemyLocs; //destroy an enemy by setting their index in this array to null
 	private SpriteSheet sheet = new SpriteSheet();
+	private Point playerLoc;
 
 	public SpaceInvadersPanel() {
 		this.setPreferredSize(new Dimension(1000, 800));
@@ -27,6 +28,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		gameTimer = new Timer(3, this);
 		enemyLocs = new Point[55];
 		setUpBindings();
+		playerLoc = new Point(500, 750);
 	}
 
 	private void setUpBindings() {
@@ -66,10 +68,12 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	
 	public void moveRight(){
 		System.out.println("weapon right");
+		playerLoc.setLocation((int)playerLoc.getX() + 50, (int)playerLoc.getY());
 	}
 	
 	public void moveLeft(){
 		System.out.println("weapon left");
+		playerLoc.setLocation((int)playerLoc.getX() - 50, (int)playerLoc.getY());
 	}
 	
 	public void startGame() {
@@ -152,11 +156,19 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			unitNum++;
 		}
 	}
+	
+	private void playerAnimation(Graphics g) {
+		// TODO Auto-generated method stub
+		if (gameTimer.isRunning()){
+			g.drawImage(sheet.getPlayer(), (int)playerLoc.getX(), (int)playerLoc.getY(), 25, 25, this);
+		}
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		enemyAnimation(g);
+		playerAnimation(g);
 		if (!gameTimer.isRunning()) g.drawImage(sheet.getTitle(), 100, 100, this.getWidth() - 200, this.getHeight() - 200, null);
 	}
 }
