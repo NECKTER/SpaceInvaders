@@ -57,6 +57,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener{
 	}
 	
 	public void destroyEnemy(int unitNum){
+		//highest unit number is 54, lowest is 0; 55 enemies in total
+		//the unit numbers go in the same order that the enemies appear in the game
 		enemyLocs[unitNum] = null;
 	}
 	
