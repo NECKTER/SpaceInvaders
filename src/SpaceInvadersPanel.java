@@ -18,6 +18,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int dx = 1;
 	private int x;
 	private int y = 50;
+	private ArrayList<SpaceObject> objects = new ArrayList<>();
 	private Point[] enemyLocs; //destroy an enemy by setting their index in this array to null
 	private SpriteSheet sheet = new SpriteSheet();
 	private Point playerLoc;
@@ -29,6 +30,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		enemyLocs = new Point[55];
 		setUpBindings();
 		playerLoc = new Point(500, 750);
+		SpaceObject.panel = this;
 	}
 
 	private void setUpBindings() {
@@ -75,8 +77,24 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 	
 	public void startGame() {
-		for (int i = 0; i < 55; i++) {
-			enemyLocs[i] = (new Point(1, 1));
+//		for (int i = 0; i < 55; i++) {
+//			enemyLocs[i] = (new Point(1, 1));
+//		}
+		for (int i = 0; i < 11; i++) {
+			objects.add(new SpaceObject(x + (60 * i), y, 25, 25, sheet.getEnamy1P1()));
+			objects.get(i).addImage(sheet.getEnamy1P2());
+		}
+		for (int i = 0; i < 11; i++) {
+			objects.add(new SpaceObject(x + (60 * i), y+50, 25, 25, sheet.getEnamy2P1()));
+			objects.get(i).addImage(sheet.getEnamy2P2());
+			objects.add(new SpaceObject(x + (60 * i), y+100, 25, 25, sheet.getEnamy2P1()));
+			objects.get(i).addImage(sheet.getEnamy2P2());
+		}
+		for (int i = 0; i < 11; i++) {
+			objects.add(new SpaceObject(x + (60 * i), y+150, 25, 25, sheet.getEnamy3P1()));
+			objects.get(i).addImage(sheet.getEnamy3P2());
+			objects.add(new SpaceObject(x + (60 * i), y+200, 25, 25, sheet.getEnamy3P1()));
+			objects.get(i).addImage(sheet.getEnamy3P2());
 		}
 		gameTimer.start();
 	}
@@ -111,47 +129,55 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	private void enemyAnimation(Graphics g) {
-		int unitNum = 0;
 		for (int i = 0; i < 11; i++) {
-			Point current = enemyLocs[unitNum];
-			if (current != null) {
-				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y, 25, 25, this);
-				enemyLocs[unitNum] = new Point(x + (60 * i), y);
-			}
-			unitNum++;
+			objects.get(i).move(x + (60 * i), y);
+			objects.get(i+(11)).move(x + (60 * i), y+50);
+			objects.get(i+(11*2)).move(x + (60 * i), y+100);
+			objects.get(i+(11*3)).move(x + (60 * i), y+150);
+			objects.get(i+(11*4)).move(x + (60 * i), y+200);
 		}
-		for (int i = 0; i < 11; i++) {
-			Point current = enemyLocs[unitNum];
-			if (current != null) {
-				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 50, 25, 25, this);
-				enemyLocs[unitNum] = new Point(x + (60 * i), y + 50);
-			}
-			unitNum++;
-		}
-		for (int i = 0; i < 11; i++) {
-			Point current = enemyLocs[unitNum];
-			if (current != null) {
-				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 100, 25, 25, this);
-				enemyLocs[unitNum] = new Point(x + (60 * i), y + 100);
-			}
-			unitNum++;
-		}
-		for (int i = 0; i < 11; i++) {
-			Point current = enemyLocs[unitNum];
-			if (current != null) {
-				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 150, 25, 25, this);
-				enemyLocs[unitNum] = new Point(x + (60 * i), y + 150);
-			}
-			unitNum++;
-		}
-		for (int i = 0; i < 11; i++) {
-			Point current = enemyLocs[unitNum];
-			if (current != null) {
-				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 200, 25, 25, this);
-				enemyLocs[unitNum] = new Point(x + (60 * i), y + 200);
-			}
-			unitNum++;
-		}
+		for(SpaceObject obj:objects)obj.draw();
+//		int unitNum = 0;
+//		for (int i = 0; i < 11; i++) {
+//			Point current = enemyLocs[unitNum];
+//			if (current != null) {
+//				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y, 25, 25, this);
+//				enemyLocs[unitNum] = new Point(x + (60 * i), y);
+//			}
+//			unitNum++;
+//		}
+//		for (int i = 0; i < 11; i++) {
+//			Point current = enemyLocs[unitNum];
+//			if (current != null) {
+//				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 50, 25, 25, this);
+//				enemyLocs[unitNum] = new Point(x + (60 * i), y + 50);
+//			}
+//			unitNum++;
+//		}
+//		for (int i = 0; i < 11; i++) {
+//			Point current = enemyLocs[unitNum];
+//			if (current != null) {
+//				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 100, 25, 25, this);
+//				enemyLocs[unitNum] = new Point(x + (60 * i), y + 100);
+//			}
+//			unitNum++;
+//		}
+//		for (int i = 0; i < 11; i++) {
+//			Point current = enemyLocs[unitNum];
+//			if (current != null) {
+//				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 150, 25, 25, this);
+//				enemyLocs[unitNum] = new Point(x + (60 * i), y + 150);
+//			}
+//			unitNum++;
+//		}
+//		for (int i = 0; i < 11; i++) {
+//			Point current = enemyLocs[unitNum];
+//			if (current != null) {
+//				g.drawImage(sheet.getEnamy1P1(), x + (60 * i), y + 200, 25, 25, this);
+//				enemyLocs[unitNum] = new Point(x + (60 * i), y + 200);
+//			}
+//			unitNum++;
+//		}
 	}
 	
 	private void playerAnimation(Graphics g) {
@@ -164,8 +190,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		if (!gameTimer.isRunning()){
+			g.drawImage(sheet.getTitle(), 100, 100, this.getWidth() - 200, this.getHeight() - 200, null);
+		}else {
 		enemyAnimation(g);
 		playerAnimation(g);
-		if (!gameTimer.isRunning()) g.drawImage(sheet.getTitle(), 100, 100, this.getWidth() - 200, this.getHeight() - 200, null);
+		}
 	}
 }

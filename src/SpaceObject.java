@@ -46,4 +46,10 @@ public class SpaceObject {
 		}
 		return img;
 	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 }
