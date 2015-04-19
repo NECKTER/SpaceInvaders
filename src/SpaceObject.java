@@ -9,6 +9,7 @@ public class SpaceObject {
 	private Image img2;
 	private boolean canAnimate = false;
 	private int animation = 0;
+	private boolean changeImg = true;
 
 	public SpaceObject(int x, int y, int h, int w, Image img) {
 		this.h = h;
@@ -22,6 +23,12 @@ public class SpaceObject {
 		// TODO Auto-generated method stub
 		this.img2 = img;
 		canAnimate = true;
+	}
+
+	public void draw(boolean changeImg) {
+		this.changeImg = changeImg;
+		panel.getGraphics().drawImage(getImage(), x, y, w, h, null);
+		this.changeImg = true;
 	}
 
 	public void draw() {
@@ -38,17 +45,23 @@ public class SpaceObject {
 		// TODO Auto-generated method stub
 		if (canAnimate) {
 			if (animation == 0) {
-				animation++;
+				if (changeImg) {
+					animation++;
+				}
 				return img;
 			}
-			animation--;
+			if (changeImg) {
+				animation--;
+			}
 			return img2;
 		}
 		return img;
 	}
+
 	public int getX() {
 		return x;
 	}
+
 	public int getY() {
 		return y;
 	}
