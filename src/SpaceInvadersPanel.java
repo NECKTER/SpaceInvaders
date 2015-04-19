@@ -27,8 +27,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private SpriteSheet sheet = new SpriteSheet();
 	private Point playerLoc;
 	private boolean needsRepaint = true;
+	private Painter painter;
 
 	public SpaceInvadersPanel() {
+		setDoubleBuffered(true);
 		this.setPreferredSize(new Dimension(1000, 800));
 		setBackground(Color.black);
 		gameTimer = new Timer(4, this);
@@ -86,17 +88,24 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		}
 		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y + 50, 25, 25, sheet.getEnamy2P1()));
-			objects.get(i).addImage(sheet.getEnamy2P2());
-			objects.add(new SpaceObject(x + (60 * i), y + 100, 25, 25, sheet.getEnamy2P1()));
-			objects.get(i).addImage(sheet.getEnamy2P2());
+			objects.get(i + 11).addImage(sheet.getEnamy2P2());
 		}
 		for (int i = 0; i < 11; i++) {
+			objects.add(new SpaceObject(x + (60 * i), y + 100, 25, 25, sheet.getEnamy2P1()));
+			objects.get(i + 22).addImage(sheet.getEnamy2P2());
+		}
+
+		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y + 150, 25, 25, sheet.getEnamy3P1()));
-			objects.get(i).addImage(sheet.getEnamy3P2());
+			objects.get(i + 33).addImage(sheet.getEnamy3P2());
+		}
+		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y + 200, 25, 25, sheet.getEnamy3P1()));
-			objects.get(i).addImage(sheet.getEnamy3P2());
+			objects.get(i + 44).addImage(sheet.getEnamy3P2());
 		}
 		gameTimer.start();
+		painter = new Painter(this.getGraphics(), objects);
+		painter.start();
 	}
 
 	@Override
@@ -132,15 +141,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void enemyAnimation(Graphics g) {
 		for (int i = 0; i < 11; i++) {
 			objects.get(i).move(x + (60 * i), y);
-			objects.get(i).draw(needsRepaint);
 			objects.get(i + (11)).move(x + (60 * i), y + 50);
-			objects.get(i + (11)).draw(needsRepaint);
 			objects.get(i + (11 * 2)).move(x + (60 * i), y + 100);
-			objects.get(i + (11 * 2)).draw(needsRepaint);
 			objects.get(i + (11 * 3)).move(x + (60 * i), y + 150);
-			objects.get(i + (11 * 3)).draw(needsRepaint);
 			objects.get(i + (11 * 4)).move(x + (60 * i), y + 200);
-			objects.get(i + (11 * 4)).draw(needsRepaint);
 		}
 //		int unitNum = 0;
 //		for (int i = 0; i < 11; i++) {
@@ -199,6 +203,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			g.drawImage(sheet.getTitle(), 100, 100, this.getWidth() - 200, this.getHeight() - 200, null);
 		} else {
 			enemyAnimation(g);
+			painter.update(objects);
 			playerAnimation(g);
 		}
 	}
