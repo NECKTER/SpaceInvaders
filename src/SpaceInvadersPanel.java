@@ -41,6 +41,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void setUpBindings() {
 		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "shoot");
 		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "right");
+		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "left");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released RIGHT"), "Stop right");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released LEFT"), "Stop left");
 		this.getActionMap().put("shoot", new AbstractAction() {
