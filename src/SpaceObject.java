@@ -39,10 +39,10 @@ public class SpaceObject {
 		g.drawImage(getImage(), x, y, w, h, panel);
 	}
 
-	public void move(int x, int y) {
+	public void move(double x, double y) {
 		// TODO Auto-generated method stub
-		this.x = x;
-		this.y = y;
+		this.x = (int)x;
+		this.y = (int)y;
 	}
 
 	private Image getImage() {

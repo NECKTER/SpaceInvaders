@@ -28,6 +28,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private boolean needsRepaint = true;
 	private SpaceObject player = new SpaceObject(500, 750, 25, 25, sheet.getPlayer());
 	private ArrayList<SpaceObject> bullets = new ArrayList<>();
+	private double shipMove = 0;
+	private int hold = 1;
+	private int shipStartSpeed = 1;
+	private int shipAcceleration = 10;//larger is slower
 
 	public SpaceInvadersPanel() {
 		setDoubleBuffered(true);
@@ -63,7 +67,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("Right released");
+				shipMove = 0;
+				hold = 1;
 			}
 		});
 		this.getActionMap().put("Stop left", new AbstractAction() {
@@ -74,7 +80,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("left released");
+				shipMove = 0;
+				hold = 1;
 			}
 		});
 		this.getActionMap().put("right", new AbstractAction() {
@@ -85,7 +93,13 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moveRight();
+				System.out.println("right");
+				shipMove += shipStartSpeed;
+				if (hold % shipAcceleration == 0) {
+					shipMove--;
+					System.out.println("speed Increase" + shipMove);
+				}
+				hold++;
 			}
 		});
 		this.getActionMap().put("left", new AbstractAction() {
@@ -96,7 +110,13 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moveLeft();
+				System.out.println("left");
+				shipMove -= shipStartSpeed;
+				if (hold % shipAcceleration == 0) {
+					shipMove++;
+					System.out.println("speed Increase " + shipMove);
+				}
+				hold++;
 			}
 
 		});
@@ -106,12 +126,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
 	}
 
-	public void moveRight() {
-		player.move(player.getX() + 25, player.getY());
-	}
-
-	public void moveLeft() {
-		player.move(player.getX() - 25, player.getY());
+	public void moveShip() {
+		player.move(player.getX() + shipMove, player.getY());
 	}
 
 	public void startGame() {
@@ -141,7 +157,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		moveEverything();
 		checkForCollision();
 		repaint();
@@ -156,6 +171,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (n % (beforeMove * 5) == 0) {
 			needsRepaint = true;
 		}
+		moveShip();
 	}
 
 	public void checkForCollision() {
@@ -208,7 +224,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void bulletAnimation(Graphics g) {
 		// TODO Auto-generated method stub
 		for (SpaceObject spaceObject : bullets) {
-			spaceObject.move(spaceObject.getX(), spaceObject.getY() - 1);
+			spaceObject.move(spaceObject.getX(), spaceObject.getY() - 5);
 			spaceObject.draw(g);
 		}
 	}
