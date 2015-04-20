@@ -1,3 +1,5 @@
+import info.gridworld.grid.Location;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -69,7 +71,6 @@ public class SpaceObject {
 	}
 
 	public void shoot() {
-		// TODO Auto-generated method stub
 		
 	}
 }
