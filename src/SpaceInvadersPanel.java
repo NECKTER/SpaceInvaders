@@ -21,22 +21,23 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int n;
 	private int dx = 1;
 	private int x;
+	private int beforeMove = 5;
 	private int y = 50;
 	private ArrayList<SpaceObject> objects = new ArrayList<>();
-	private Point[] enemyLocs; //destroy an enemy by setting their index in this array to null
+//	private Point[] enemyLocs; //destroy an enemy by setting their index in this array to null
 	private SpriteSheet sheet = new SpriteSheet();
-	private Point playerLoc;
+//	private Point playerLoc;
 	private boolean needsRepaint = true;
-	private Painter painter;
+	private SpaceObject player = new SpaceObject(500, 750, 25, 25, sheet.getPlayer());
 
 	public SpaceInvadersPanel() {
 		setDoubleBuffered(true);
 		this.setPreferredSize(new Dimension(1000, 800));
 		setBackground(Color.black);
 		gameTimer = new Timer(4, this);
-		enemyLocs = new Point[55];
+		//enemyLocs = new Point[55];
 		setUpBindings();
-		playerLoc = new Point(500, 750);
+		//playerLoc = new Point(500, 750);
 		SpaceObject.panel = this;
 	}
 
@@ -46,18 +47,33 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "right");
 		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "left");
 		this.getActionMap().put("shoot", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				launchWeapon();
 			}
 		});
 		this.getActionMap().put("right", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveRight();
 			}
 		});
 		this.getActionMap().put("left", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveLeft();
@@ -67,15 +83,17 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void launchWeapon() {
-
+		player.shoot();
 	}
 
 	public void moveRight() {
-		playerLoc.setLocation((int) playerLoc.getX() + 50, (int) playerLoc.getY());
+//		playerLoc.setLocation((int) playerLoc.getX() + 50, (int) playerLoc.getY());
+		player.move(player.getX() + 25, player.getY());
 	}
 
 	public void moveLeft() {
-		playerLoc.setLocation((int) playerLoc.getX() - 50, (int) playerLoc.getY());
+//		playerLoc.setLocation((int) playerLoc.getX() - 50, (int) playerLoc.getY());
+		player.move(player.getX() - 25, player.getY());
 	}
 
 	public void startGame() {
@@ -104,8 +122,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			objects.get(i + 44).addImage(sheet.getEnamy3P2());
 		}
 		gameTimer.start();
-		painter = new Painter(this.getGraphics(), objects);
-		painter.start();
 	}
 
 	@Override
@@ -119,8 +135,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void moveEverything() {
 		// TODO Auto-generated method stub
 		n++;
-		if (n % 5 == 0) {
+		if (n % beforeMove == 0) {
 			x += dx;
+		}
+		if (n % (beforeMove * 5) == 0) {
 			needsRepaint = true;
 		}
 	}
@@ -135,17 +153,23 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void destroyEnemy(int unitNum) {
 		//highest unit number is 54, lowest is 0; 55 enemies in total
 		//the unit numbers go in the same order that the enemies appear in the game
-		enemyLocs[unitNum] = null;
+		//	enemyLocs[unitNum] = null;
 	}
 
 	private void enemyAnimation(Graphics g) {
 		for (int i = 0; i < 11; i++) {
 			objects.get(i).move(x + (60 * i), y);
+			objects.get(i).draw(needsRepaint, g);
 			objects.get(i + (11)).move(x + (60 * i), y + 50);
-			objects.get(i + (11 * 2)).move(x + (60 * i), y + 100);
-			objects.get(i + (11 * 3)).move(x + (60 * i), y + 150);
-			objects.get(i + (11 * 4)).move(x + (60 * i), y + 200);
+			objects.get(i + (11)).draw(needsRepaint, g);
+			objects.get(i + (22)).move(x + (60 * i), y + 100);
+			objects.get(i + (22)).draw(needsRepaint, g);
+			objects.get(i + (33)).move(x + (60 * i), y + 150);
+			objects.get(i + (33)).draw(needsRepaint, g);
+			objects.get(i + (44)).move(x + (60 * i), y + 200);
+			objects.get(i + (44)).draw(needsRepaint, g);
 		}
+		needsRepaint = false;
 //		int unitNum = 0;
 //		for (int i = 0; i < 11; i++) {
 //			Point current = enemyLocs[unitNum];
@@ -192,7 +216,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void playerAnimation(Graphics g) {
 		// TODO Auto-generated method stub
 		if (gameTimer.isRunning()) {
-			g.drawImage(sheet.getPlayer(), (int) playerLoc.getX(), (int) playerLoc.getY(), 25, 25, this);
+			//g.drawImage(sheet.getPlayer(), (int) playerLoc.getX(), (int) playerLoc.getY(), 25, 25, this);
+			player.draw(g);
 		}
 	}
 
@@ -203,7 +228,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			g.drawImage(sheet.getTitle(), 100, 100, this.getWidth() - 200, this.getHeight() - 200, null);
 		} else {
 			enemyAnimation(g);
-			painter.update(objects);
 			playerAnimation(g);
 		}
 	}

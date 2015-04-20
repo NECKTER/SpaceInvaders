@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
@@ -25,14 +26,15 @@ public class SpaceObject {
 		canAnimate = true;
 	}
 
-	public void draw(boolean changeImg) {
+	public void draw(boolean changeImg, Graphics g) {
 		this.changeImg = changeImg;
-		panel.getGraphics().drawImage(getImage(), x, y, w, h, null);
+		g.drawImage(getImage(), x, y, w, h, panel);
 		this.changeImg = true;
 	}
 
-	public void draw() {
-		panel.getGraphics().drawImage(getImage(), x, y, w, h, null);
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		g.drawImage(getImage(), x, y, w, h, panel);
 	}
 
 	public void move(int x, int y) {
@@ -64,5 +66,10 @@ public class SpaceObject {
 
 	public int getY() {
 		return y;
+	}
+
+	public void shoot() {
+		// TODO Auto-generated method stub
+		
 	}
 }
