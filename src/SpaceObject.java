@@ -13,6 +13,7 @@ public class SpaceObject {
 	private boolean canAnimate = false;
 	private int animation = 0;
 	private boolean changeImg = true;
+	private boolean destroyed = false;
 
 	public SpaceObject(int x, int y, int h, int w, Image img) {
 		this.h = h;
@@ -30,14 +31,18 @@ public class SpaceObject {
 	}
 
 	public void draw(boolean changeImg, Graphics g) {
+		if (!destroyed) {
 		this.changeImg = changeImg;
 		g.drawImage(getImage(), x, y, w, h, panel);
 		this.changeImg = true;
+		}
 	}
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		if (!destroyed) {
 		g.drawImage(getImage(), x, y, w, h, panel);
+		}
 	}
 
 	public void move(double x, double y) {
@@ -75,7 +80,9 @@ public class SpaceObject {
 		
 	}
 	public void destroy(){
-		this.x = 5000;
-		this.y = 5000;
+		destroyed = true;
+	}
+	public boolean isDestroyed() {
+		return destroyed;
 	}
 }
