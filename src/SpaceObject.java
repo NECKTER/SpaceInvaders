@@ -74,4 +74,8 @@ public class SpaceObject {
 	public void shoot() {
 		
 	}
+	public void destroy(){
+		this.x = 5000;
+		this.y = 5000;
+	}
 }
