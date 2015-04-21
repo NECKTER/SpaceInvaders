@@ -180,6 +180,19 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			dx *= -1;
 			y += (this.getHeight() / 200);
 		}
+		for (int i = 0; i < objects.size(); i++){
+			SpaceObject currentEnemy = objects.get(i);
+			Rectangle enemyRectangle = currentEnemy.getRect();
+			for (int x = 0; x < bullets.size(); x++){
+				SpaceObject currentBullet = bullets.get(x);
+				if (enemyRectangle.contains(currentBullet.getX(), currentBullet.getY())){
+					System.out.println("enemy hit");
+					bullets.remove(x);
+					currentEnemy.destroy();
+					
+				}
+			}
+		}
 	}
 
 	public void destroyEnemy(int unitNum) {
