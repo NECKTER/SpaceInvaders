@@ -20,6 +20,7 @@ public class SpaceObject {
 		this.w = w;
 		this.x = x;
 		this.y = y;
+		this.myrect = new Rectangle(x, y, w, h);
 	}
 
 	public void addImage(Image img) {
