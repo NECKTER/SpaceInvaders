@@ -28,9 +28,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private boolean needsRepaint = true;
 	private SpaceObject player = new SpaceObject(500, 750, 25, 25, sheet.getPlayer());
 	private ArrayList<SpaceObject> bullets = new ArrayList<>();
+	private ArrayList<SpaceObject> toremove = new ArrayList<>();
 	private double shipMove = 0;
 	private int hold = 1;
-	private int shipStartSpeed = 1;
+	private int shipStartSpeed = 2;
 	private int shipAcceleration = 10;//larger is slower
 
 	public SpaceInvadersPanel() {
@@ -225,7 +226,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		for (SpaceObject spaceObject : bullets) {
 			spaceObject.move(spaceObject.getX(), spaceObject.getY() - 5);
+			if(spaceObject.getY()<0)toremove.add(spaceObject);
 			spaceObject.draw(g);
 		}
+		bullets.removeAll(toremove);
+		toremove.removeAll(toremove);
 	}
 }
