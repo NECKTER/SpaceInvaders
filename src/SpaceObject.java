@@ -85,4 +85,8 @@ public class SpaceObject {
 	public boolean isDestroyed() {
 		return destroyed;
 	}
+	
+	public Rectangle getRect(){
+		return myrect;
+	}
 }
