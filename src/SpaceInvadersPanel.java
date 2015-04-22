@@ -159,6 +159,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		for (SpaceObject spaceObject : bullets) {
+			if (spaceObject.isDestroyed()) {
+				bullets.remove(spaceObject);
+			}
+		}
 		moveEverything();
 		checkForCollision();
 		repaint();
@@ -181,18 +186,16 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			dx *= -1;
 			y += (this.getHeight() / 200);
 		}
-		for (int i = 0; i < objects.size(); i++){
-			SpaceObject currentEnemy = objects.get(i);
-			Rectangle enemyRectangle = currentEnemy.getRect();
-			for (int x = 0; x < bullets.size(); x++){
-				SpaceObject currentBullet = bullets.get(x);
-				if (enemyRectangle.contains(currentBullet.getX(), currentBullet.getY())){
+		for (SpaceObject spaceObject : objects) {
+			for (SpaceObject spaceBullet : bullets) {
+				if (!spaceBullet.isDestroyed() && spaceObject.getRect().contains(spaceBullet.getX(), spaceBullet.getY())) {
 					System.out.println("enemy hit");
-					bullets.remove(x);
-					currentEnemy.destroy();
-					
+					toremove.add(spaceBullet);
+					spaceObject.destroy();
 				}
 			}
+			bullets.removeAll(toremove);
+			toremove.clear();
 		}
 	}
 
@@ -240,10 +243,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		for (SpaceObject spaceObject : bullets) {
 			spaceObject.move(spaceObject.getX(), spaceObject.getY() - 5);
-			if(spaceObject.getY()<0)toremove.add(spaceObject);
+			if (spaceObject.getY() < 0) toremove.add(spaceObject);
 			spaceObject.draw(g);
 		}
 		bullets.removeAll(toremove);
-		toremove.removeAll(toremove);
+		toremove.clear();
 	}
 }
