@@ -19,7 +19,7 @@ public class SpaceObject {
 		this.w = w;
 		this.x = x;
 		this.y = y;
-		this.myrect = new Rectangle(x, y, w, h);
+		this.myrect = new Rectangle(x, y, w*8/5, h);
 	}
 
 	public void addImage(Image img) {
@@ -43,10 +43,12 @@ public class SpaceObject {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void move(double x, double y) {
 		// TODO Auto-generated method stub
 		this.x = (int)x;
 		this.y = (int)y;
+		myrect.move((int)x, (int)y);
 	}
 
 	private Image getImage() {
