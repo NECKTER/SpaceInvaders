@@ -19,7 +19,7 @@ public class SpaceObject {
 		this.w = w;
 		this.x = x;
 		this.y = y;
-		this.myrect = new Rectangle(x, y, w*8/5, h);
+		this.myrect = new Rectangle(x-w/3, y, w*2, h);
 	}
 
 	public void addImage(Image img) {
@@ -48,7 +48,7 @@ public class SpaceObject {
 		// TODO Auto-generated method stub
 		this.x = (int)x;
 		this.y = (int)y;
-		myrect.move((int)x, (int)y);
+		myrect.move((int)x-w/3, (int)y);
 	}
 
 	private Image getImage() {
