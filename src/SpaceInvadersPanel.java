@@ -22,7 +22,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int n;
 	private int dx = 1;
 	private int x;
-	private int beforeMove = 1;
+	private int beforeMove = 5;
 	private int y = 50;
 	private ArrayList<SpaceObject> objects = new ArrayList<>();
 	private SpriteSheet sheet = new SpriteSheet();
@@ -35,6 +35,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipStartSpeed = 2;
 	private int shipAcceleration = 10;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
+	private int shootDelay = 333;//1000 = 1 second
 
 	//to do list
 	//enemy dropdown 
@@ -125,7 +126,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	public void launchWeapon() {
 		double curretTime = System.currentTimeMillis();
-		if (curretTime - lastShotTime >= 333) {
+		if (curretTime - lastShotTime >= shootDelay) {
 			bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
 			lastShotTime = curretTime;
 		}
