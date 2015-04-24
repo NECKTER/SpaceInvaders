@@ -19,7 +19,7 @@ public class SpaceObject {
 		this.w = w;
 		this.x = x;
 		this.y = y;
-		this.myrect = new Rectangle(x-w/3, y, w*2, h);
+		this.myrect = new Rectangle(x - w / 3, y, w * 2, h);
 	}
 
 	public void addImage(Image img) {
@@ -30,25 +30,25 @@ public class SpaceObject {
 
 	public void draw(boolean changeImg, Graphics g) {
 		if (!destroyed) {
-		this.changeImg = changeImg;
-		g.drawImage(getImage(), x, y, w, h, panel);
-		this.changeImg = true;
+			this.changeImg = changeImg;
+			g.drawImage(getImage(), x, y, w, h, panel);
+			this.changeImg = true;
 		}
 	}
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		if (!destroyed) {
-		g.drawImage(getImage(), x, y, w, h, panel);
+			g.drawImage(getImage(), x, y, w, h, panel);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
 	public void move(double x, double y) {
 		// TODO Auto-generated method stub
-		this.x = (int)x;
-		this.y = (int)y;
-		myrect.move((int)x-w/3, (int)y);
+		this.x = (int) x;
+		this.y = (int) y;
+		myrect.move((int) x - w / 3, (int) y);
 	}
 
 	private Image getImage() {
@@ -77,16 +77,18 @@ public class SpaceObject {
 	}
 
 	public void shoot() {
-		
+
 	}
-	public void destroy(){
+
+	public void destroy() {
 		destroyed = true;
 	}
+
 	public boolean isDestroyed() {
 		return destroyed;
 	}
-	
-	public Rectangle getRect(){
+
+	public Rectangle getRect() {
 		return myrect;
 	}
 }

@@ -22,10 +22,7 @@ public class SpriteSheet {
 	public SpriteSheet() {
 		try {
 			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/SpriteSheet.png"));
-			System.out.println("Image loaded");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("loadFailed");
 		}
 		Title = main.getSubimage(0, 0, 228, 151);
 		Enamy1P1 = main.getSubimage(229, 0, 292 - 229, 63);

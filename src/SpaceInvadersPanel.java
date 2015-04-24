@@ -22,7 +22,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int n;
 	private int dx = 1;
 	private int x;
-	private int beforeMove = 5;
+	private int beforeMove = 1;
 	private int y = 50;
 	private ArrayList<SpaceObject> objects = new ArrayList<>();
 	private SpriteSheet sheet = new SpriteSheet();
@@ -34,6 +34,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int hold = 1;
 	private int shipStartSpeed = 2;
 	private int shipAcceleration = 10;//larger is slower
+	private double lastShotTime = System.currentTimeMillis();
+
+	//to do list
+	//enemy dropdown 
+	//enemy speed up
 
 	public SpaceInvadersPanel() {
 		setDoubleBuffered(true);
@@ -69,7 +74,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Right released");
 				shipMove = 0;
 				hold = 1;
 			}
@@ -82,7 +86,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("left released");
 				shipMove = 0;
 				hold = 1;
 			}
@@ -95,11 +98,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("right");
 				shipMove += shipStartSpeed;
 				if (hold % shipAcceleration == 0) {
 					shipMove--;
-					System.out.println("speed Increase" + shipMove);
 				}
 				hold++;
 			}
@@ -112,11 +113,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("left");
 				shipMove -= shipStartSpeed;
 				if (hold % shipAcceleration == 0) {
 					shipMove++;
-					System.out.println("speed Increase " + shipMove);
 				}
 				hold++;
 			}
@@ -125,7 +124,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void launchWeapon() {
-		bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
+		double curretTime = System.currentTimeMillis();
+		if (curretTime - lastShotTime >= 333) {
+			bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
+			lastShotTime = curretTime;
+		}
 	}
 
 	public void moveShip() {
@@ -249,12 +252,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			spaceObject.draw(g);
 			for (SpaceObject spaceEnemy : objects) {
 				if (!spaceEnemy.isDestroyed() && spaceEnemy.getRect().contains(spaceObject.getX(), spaceObject.getY())) {
-				System.out.println("enemy hit");
-				toremove.add(spaceObject);
-				spaceEnemy.destroy();
+					toremove.add(spaceObject);
+					spaceEnemy.destroy();
+				}
 			}
-			}
-			
+
 		}
 		bullets.removeAll(toremove);
 		toremove.clear();
