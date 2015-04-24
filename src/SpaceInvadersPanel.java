@@ -163,7 +163,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (gameOver()){
+		if (gameOver()) {
 			System.out.println("Game over!");
 			gameTimer.stop();
 		}
@@ -176,10 +176,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		checkForCollision();
 		repaint();
 	}
-	
-	public boolean gameOver(){
-		for (SpaceObject spaceEnemy: objects){
-			if (!spaceEnemy.isDestroyed()){
+
+	public boolean gameOver() {
+		for (SpaceObject spaceEnemy : objects) {
+			if (!spaceEnemy.isDestroyed()) {
 				return false;
 			}
 		}
