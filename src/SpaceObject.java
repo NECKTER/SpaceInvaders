@@ -1,5 +1,3 @@
-import info.gridworld.grid.Location;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
