@@ -26,7 +26,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int y = 50;
 	private ArrayList<SpaceObject> objects = new ArrayList<>();
 	private SpriteSheet sheet = new SpriteSheet();
-	private boolean needsRepaint = true;
+	private boolean needsImgChange = true;
 	private SpaceObject player = new SpaceObject(500, 750, 25, 25, sheet.getPlayer());
 	private ArrayList<SpaceObject> bullets = new ArrayList<>();
 	private ArrayList<SpaceObject> toremove = new ArrayList<>();
@@ -176,7 +176,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			x += dx;
 		}
 		if (n % (beforeMove * 5) == 0) {
-			needsRepaint = true;
+			needsImgChange = true;
 		}
 		moveShip();
 	}
@@ -185,17 +185,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (x > this.getWidth() - 660 || x < 0) {
 			dx *= -1;
 			y += (this.getHeight() / 200);
-		}
-		for (SpaceObject spaceObject : objects) {
-			for (SpaceObject spaceBullet : bullets) {
-				if (!spaceBullet.isDestroyed() && spaceObject.getRect().contains(spaceBullet.getX(), spaceBullet.getY())) {
-					System.out.println("enemy hit");
-					toremove.add(spaceBullet);
-					spaceObject.destroy();
-				}
-			}
-			bullets.removeAll(toremove);
-			toremove.clear();
 		}
 	}
 
@@ -207,17 +196,17 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private void enemyAnimation(Graphics g) {
 		for (int i = 0; i < 11; i++) {
 			objects.get(i).move(x + (60 * i), y);
-			objects.get(i).draw(needsRepaint, g);
+			objects.get(i).draw(needsImgChange, g);
 			objects.get(i + (11)).move(x + (60 * i), y + 50);
-			objects.get(i + (11)).draw(needsRepaint, g);
+			objects.get(i + (11)).draw(needsImgChange, g);
 			objects.get(i + (22)).move(x + (60 * i), y + 100);
-			objects.get(i + (22)).draw(needsRepaint, g);
+			objects.get(i + (22)).draw(needsImgChange, g);
 			objects.get(i + (33)).move(x + (60 * i), y + 150);
-			objects.get(i + (33)).draw(needsRepaint, g);
+			objects.get(i + (33)).draw(needsImgChange, g);
 			objects.get(i + (44)).move(x + (60 * i), y + 200);
-			objects.get(i + (44)).draw(needsRepaint, g);
+			objects.get(i + (44)).draw(needsImgChange, g);
 		}
-		needsRepaint = false;
+		needsImgChange = false;
 	}
 
 	private void playerAnimation(Graphics g) {
@@ -245,6 +234,14 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			spaceObject.move(spaceObject.getX(), spaceObject.getY() - 5);
 			if (spaceObject.getY() < 0) toremove.add(spaceObject);
 			spaceObject.draw(g);
+			for (SpaceObject spaceEnemy : objects) {
+				if (!spaceEnemy.isDestroyed() && spaceEnemy.getRect().contains(spaceObject.getX(), spaceObject.getY())) {
+				System.out.println("enemy hit");
+				toremove.add(spaceObject);
+				spaceEnemy.destroy();
+			}
+			}
+			
 		}
 		bullets.removeAll(toremove);
 		toremove.clear();
