@@ -32,8 +32,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private ArrayList<SpaceObject> toremove = new ArrayList<>();
 	private double shipMove = 0;
 	private int hold = 1;
-	private int shipStartSpeed = 2;
-	private int shipAcceleration = 10;//larger is slower
+	private int shipStartSpeed = 7;
+	private int shipAcceleration = 1;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private int shootDelay = 333;//1000 = 1 second
 
@@ -99,10 +99,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove += shipStartSpeed;
-				if (hold % shipAcceleration == 0) {
-					shipMove--;
-				}
+				shipMove = shipStartSpeed+(hold/shipAcceleration);
 				hold++;
 			}
 		});
@@ -114,10 +111,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove -= shipStartSpeed;
-				if (hold % shipAcceleration == 0) {
-					shipMove++;
-				}
+				shipMove = (shipStartSpeed+(hold/shipAcceleration))*-1;
 				hold++;
 			}
 
@@ -137,6 +131,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void startGame() {
+		objects.clear();
+		bullets.clear();
 		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y, 25, 25, sheet.getEnamy1P1()));
 			objects.get(i).addImage(sheet.getEnamy1P2());
