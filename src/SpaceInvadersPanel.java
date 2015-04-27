@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
-
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -36,6 +35,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipAcceleration = 1;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private int shootDelay = 333;//1000 = 1 second
+	private int enemiesDestroyed = 0;
+	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 
 	//to do list
 	//enemy dropdown 
@@ -171,6 +172,16 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		moveEverything();
 		checkForCollision();
 		repaint();
+		checkEnemiesDestroyed();
+	}
+	
+	private void checkEnemiesDestroyed(){
+		for (SpaceObject enemy:objects){
+			if (enemy.isDestroyed() && !destroyed.contains(enemy)){
+				destroyed.add(enemy);
+				enemiesDestroyed++;
+			}
+		}
 	}
 
 	public boolean gameOver() {
