@@ -32,7 +32,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private ArrayList<SpaceObject> toremove = new ArrayList<>();
 	private double shipMove = 0;
 	private int hold = 1;
-	private int shipStartSpeed = 7;
+	private int shipStartSpeed = 2;
 	private int shipAcceleration = 1;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private int shootDelay = 333;//1000 = 1 second
@@ -201,23 +201,29 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public void destroyEnemy(int unitNum) {
-		//highest unit number is 54, lowest is 0; 55 enemies in total
-		//the unit numbers go in the same order that the enemies appear in the game
-	}
-
 	private void enemyAnimation(Graphics g) {
-		for (int i = 0; i < 11; i++) {
-			objects.get(i).move(x + (60 * i), y);
-			objects.get(i).draw(needsImgChange, g);
-			objects.get(i + (11)).move(x + (60 * i), y + 50);
-			objects.get(i + (11)).draw(needsImgChange, g);
-			objects.get(i + (22)).move(x + (60 * i), y + 100);
-			objects.get(i + (22)).draw(needsImgChange, g);
-			objects.get(i + (33)).move(x + (60 * i), y + 150);
-			objects.get(i + (33)).draw(needsImgChange, g);
-			objects.get(i + (44)).move(x + (60 * i), y + 200);
-			objects.get(i + (44)).draw(needsImgChange, g);
+		for (SpaceObject spaceObject : objects) {
+			int index = objects.indexOf(spaceObject);
+			int indexSubtract = 0;
+			int height = y;
+			if (index >= 11) {
+				height += 50;
+				indexSubtract+=11;
+			}
+			if (index >= 22) {
+				height += 50;
+				indexSubtract+=11;
+			}
+			if (index >= 33) {
+				height += 50;
+				indexSubtract+=11;
+			}
+			if (index >= 44) {
+				height += 50;
+				indexSubtract+=11;
+			}
+			spaceObject.move(x + (60 * (index-indexSubtract)), height);
+			spaceObject.draw(needsImgChange, g);
 		}
 		needsImgChange = false;
 	}
