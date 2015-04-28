@@ -41,9 +41,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	//to do list
 	//enemy dropdown 
 	//enemy speed up
+	//enemy shoot
 
 	public SpaceInvadersPanel() {
-		setDoubleBuffered(true);
 		this.setPreferredSize(new Dimension(1000, 800));
 		setBackground(Color.black);
 		gameTimer = new Timer(1, this);
@@ -100,7 +100,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove = shipStartSpeed+(hold/shipAcceleration);
+				shipMove = shipStartSpeed + (hold / shipAcceleration);
 				hold++;
 			}
 		});
@@ -112,7 +112,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove = (shipStartSpeed+(hold/shipAcceleration))*-1;
+				shipMove = (shipStartSpeed + (hold / shipAcceleration)) * -1;
 				hold++;
 			}
 
@@ -134,6 +134,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void startGame() {
 		objects.clear();
 		bullets.clear();
+		dx = 1;
+		x = 0;
+		y = 50;
 		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y, 25, 25, sheet.getEnamy1P1()));
 			objects.get(i).addImage(sheet.getEnamy1P2());
@@ -174,10 +177,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		repaint();
 		checkEnemiesDestroyed();
 	}
-	
-	private void checkEnemiesDestroyed(){
-		for (SpaceObject enemy:objects){
-			if (enemy.isDestroyed() && !destroyed.contains(enemy)){
+
+	private void checkEnemiesDestroyed() {
+		for (SpaceObject enemy : objects) {
+			if (enemy.isDestroyed() && !destroyed.contains(enemy)) {
 				destroyed.add(enemy);
 				enemiesDestroyed++;
 			}
@@ -206,10 +209,22 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void checkForCollision() {
-		if (x > this.getWidth() - 660 || x < 0) {
-			dx *= -1;
-			y += (this.getHeight() / 200);
+		boolean moveDown = false;
+		for (SpaceObject spaceObject : objects) {
+			if ((spaceObject.getX() > this.getWidth() || spaceObject.getX() < 0) && !spaceObject.isDestroyed()) {
+				moveDown = true;
+				break;
+			}
 		}
+		if (moveDown) {
+			dx *= -1;
+			x += dx;
+			y += (25);
+		}
+//		if (x > this.getWidth() - 660 || x < 0) {
+//			dx *= -1;
+//			y += (this.getHeight() / 200);
+//		}
 	}
 
 	private void enemyAnimation(Graphics g) {
@@ -219,21 +234,21 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			int height = y;
 			if (index >= 11) {
 				height += 50;
-				indexSubtract+=11;
+				indexSubtract += 11;
 			}
 			if (index >= 22) {
 				height += 50;
-				indexSubtract+=11;
+				indexSubtract += 11;
 			}
 			if (index >= 33) {
 				height += 50;
-				indexSubtract+=11;
+				indexSubtract += 11;
 			}
 			if (index >= 44) {
 				height += 50;
-				indexSubtract+=11;
+				indexSubtract += 11;
 			}
-			spaceObject.move(x + (60 * (index-indexSubtract)), height);
+			spaceObject.move(x + (60 * (index - indexSubtract)), height);
 			spaceObject.draw(needsImgChange, g);
 		}
 		needsImgChange = false;
