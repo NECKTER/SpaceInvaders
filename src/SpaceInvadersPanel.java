@@ -34,19 +34,18 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipStartSpeed = 2;
 	private int shipAcceleration = 1;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
-	private int shootDelay = 333;//1000 = 1 second
+	private int shootDelay = 0;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 
 	//to do list
-	//enemy dropdown 
 	//enemy speed up
 	//enemy shoot
 
 	public SpaceInvadersPanel() {
 		this.setPreferredSize(new Dimension(1000, 800));
 		setBackground(Color.black);
-		gameTimer = new Timer(1, this);
+		gameTimer = new Timer(0, this);
 		setUpBindings();
 		SpaceObject.panel = this;
 	}
@@ -211,7 +210,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void checkForCollision() {
 		boolean moveDown = false;
 		for (SpaceObject spaceObject : objects) {
-			if ((spaceObject.getX() > this.getWidth() || spaceObject.getX() < 0) && !spaceObject.isDestroyed()) {
+			if ((spaceObject.getX() > this.getWidth() - 25 || spaceObject.getX() < 0) && !spaceObject.isDestroyed()) {
 				moveDown = true;
 				break;
 			}
