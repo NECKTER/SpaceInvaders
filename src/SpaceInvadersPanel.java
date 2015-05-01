@@ -222,34 +222,24 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (n % (beforeMove * 5) == 0) {
 			needsImgChange = true;
 		}
-<<<<<<< HEAD
-		if (enemiesDestroyed >= 25 && enemiesDestroyed < 47) {
+		if (enemiesDestroyed >= 10 && enemiesDestroyed < 33) {
 			beforeMove = 4;
 		}
-		if (enemiesDestroyed >= 47 && enemiesDestroyed < 54) {
+		if (enemiesDestroyed >= 33 && enemiesDestroyed < 47) {
 			beforeMove = 3;
 		}
-		if (enemiesDestroyed >= 54) {
-=======
-		if (enemiesDestroyed >= 10 && enemiesDestroyed < 33){
-			beforeMove = 4;
-		}
-		if (enemiesDestroyed >= 33 && enemiesDestroyed < 47){
-			beforeMove = 3;
-		}
-		if (enemiesDestroyed >= 47){
->>>>>>> origin/master
+		if (enemiesDestroyed >= 47) {
 			beforeMove = 2;
 		}
-		if(right&&left){
+		if (right && left) {
 			shipMove = 0;
 			hold = 1;
 		}
-		if (left&&!right) {
+		if (left && !right) {
 			shipMove = (shipStartSpeed + (hold / shipAcceleration)) * -1;
 			hold++;
 		}
-		if (right&&!left) {
+		if (right && !left) {
 			shipMove = (shipStartSpeed + (hold / shipAcceleration));
 			hold++;
 		}
