@@ -43,6 +43,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	//to do list
 	//enemy shoot
+	//music
+	//Obstacles
 
 	public SpaceInvadersPanel() {
 		this.setPreferredSize(new Dimension(1000, 800));
