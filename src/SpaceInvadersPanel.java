@@ -204,6 +204,15 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (n % (beforeMove * 5) == 0) {
 			needsImgChange = true;
 		}
+		if (enemiesDestroyed >= 25 && enemiesDestroyed < 47){
+			beforeMove = 4;
+		}
+		if (enemiesDestroyed >= 47 && enemiesDestroyed < 54){
+			beforeMove = 3;
+		}
+		if (enemiesDestroyed >= 54 ){
+			beforeMove = 2;
+		}
 		moveShip();
 	}
 
