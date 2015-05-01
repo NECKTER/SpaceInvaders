@@ -149,6 +149,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		dx = 1;
 		x = 0;
 		y = 50;
+		beforeMove = 5;
+		enemiesDestroyed = 0;
+		destroyed.clear();
 		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y, 25, 25, sheet.getEnamy1P1()));
 			objects.get(i).addImage(sheet.getEnamy1P2());
