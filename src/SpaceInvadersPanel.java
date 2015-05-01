@@ -150,6 +150,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		dx = 1;
 		x = 0;
 		y = 50;
+		beforeMove = 5;
+		enemiesDestroyed = 0;
+		destroyed.clear();
 		for (int i = 0; i < 11; i++) {
 			objects.add(new SpaceObject(x + (60 * i), y, 25, 25, sheet.getEnamy1P1()));
 			objects.get(i).addImage(sheet.getEnamy1P2());
@@ -219,6 +222,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (n % (beforeMove * 5) == 0) {
 			needsImgChange = true;
 		}
+<<<<<<< HEAD
 		if (enemiesDestroyed >= 25 && enemiesDestroyed < 47) {
 			beforeMove = 4;
 		}
@@ -226,6 +230,15 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			beforeMove = 3;
 		}
 		if (enemiesDestroyed >= 54) {
+=======
+		if (enemiesDestroyed >= 10 && enemiesDestroyed < 33){
+			beforeMove = 4;
+		}
+		if (enemiesDestroyed >= 33 && enemiesDestroyed < 47){
+			beforeMove = 3;
+		}
+		if (enemiesDestroyed >= 47){
+>>>>>>> origin/master
 			beforeMove = 2;
 		}
 		if(right&&left){
