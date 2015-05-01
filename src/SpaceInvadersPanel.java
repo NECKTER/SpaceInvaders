@@ -38,9 +38,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 	private boolean shooting = false;
+	private boolean right = false;
+	private boolean left = false;
 
 	//to do list
-	//enemy speed up
 	//enemy shoot
 
 	public SpaceInvadersPanel() {
@@ -90,6 +91,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				shipMove = 0;
 				hold = 1;
+				right = false;
 			}
 		});
 		this.getActionMap().put("Stop left", new AbstractAction() {
@@ -102,6 +104,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				shipMove = 0;
 				hold = 1;
+				left = false;
 			}
 		});
 		this.getActionMap().put("right", new AbstractAction() {
@@ -112,8 +115,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove = shipStartSpeed + (hold / shipAcceleration);
-				hold++;
+				right = true;
 			}
 		});
 		this.getActionMap().put("left", new AbstractAction() {
@@ -124,8 +126,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				shipMove = (shipStartSpeed + (hold / shipAcceleration)) * -1;
-				hold++;
+				left = true;
 			}
 
 		});
@@ -218,14 +219,26 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if (n % (beforeMove * 5) == 0) {
 			needsImgChange = true;
 		}
-		if (enemiesDestroyed >= 25 && enemiesDestroyed < 47){
+		if (enemiesDestroyed >= 25 && enemiesDestroyed < 47) {
 			beforeMove = 4;
 		}
-		if (enemiesDestroyed >= 47 && enemiesDestroyed < 54){
+		if (enemiesDestroyed >= 47 && enemiesDestroyed < 54) {
 			beforeMove = 3;
 		}
-		if (enemiesDestroyed >= 54 ){
+		if (enemiesDestroyed >= 54) {
 			beforeMove = 2;
+		}
+		if(right&&left){
+			shipMove = 0;
+			hold = 1;
+		}
+		if (left&&!right) {
+			shipMove = (shipStartSpeed + (hold / shipAcceleration)) * -1;
+			hold++;
+		}
+		if (right&&!left) {
+			shipMove = (shipStartSpeed + (hold / shipAcceleration));
+			hold++;
 		}
 		moveShip();
 	}
