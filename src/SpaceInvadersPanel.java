@@ -34,9 +34,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipStartSpeed = 2;
 	private int shipAcceleration = 1;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
-	private int shootDelay = 333;//1000 = 1 second
+	private int shootDelay = 0;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
+	private boolean shooting = false;
 
 	//to do list
 	//enemy speed up
@@ -52,6 +53,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	private void setUpBindings() {
 		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "shoot");
+		this.getInputMap().put(KeyStroke.getKeyStroke("released SPACE"), "shootOff");
 		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "right");
 		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "left");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released RIGHT"), "Stop right");
@@ -64,7 +66,18 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				launchWeapon();
+				shooting = true;
+			}
+		});
+		this.getActionMap().put("shootOff", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				shooting = false;
 			}
 		});
 		this.getActionMap().put("Stop right", new AbstractAction() {
@@ -120,7 +133,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 
 	public void launchWeapon() {
 		double curretTime = System.currentTimeMillis();
-		if (curretTime - lastShotTime >= shootDelay) {
+		if ((curretTime - lastShotTime >= shootDelay) && shooting) {
 			bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
 			lastShotTime = curretTime;
 		}
@@ -171,6 +184,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				bullets.remove(spaceObject);
 			}
 		}
+		launchWeapon();
 		moveEverything();
 		checkForCollision();
 		repaint();
