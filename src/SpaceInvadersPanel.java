@@ -32,16 +32,19 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private double shipMove = 0;
 	private int hold = 1;
 	private int shipStartSpeed = 2;
-	private int shipAcceleration = 1;//larger is slower
+	private int shipAcceleration = 100;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
-	private int shootDelay = 0;//1000 = 1 second
+	private int shootDelay = 333;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
+	private List<SpaceObject> enemyBullets = new ArrayList<SpaceObject>();
 	private boolean shooting = false;
 	private boolean right = false;
 	private boolean left = false;
+	private int enemyShootDelay = 750;
+	int currentShooter = 0;
 
-	//to do list
+	//to do listbullets
 	//enemy shoot
 	//music
 	//Obstacles
@@ -141,6 +144,15 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			lastShotTime = curretTime;
 		}
 	}
+	
+	public void enemyShoot(SpaceObject shooter){
+		double curretTime = System.currentTimeMillis();
+		if ((curretTime - lastShotTime >= enemyShootDelay)) {
+			enemyBullets.add(new SpaceObject(shooter.getX(), shooter.getY(), 15, 10, sheet.getBullet()));
+			lastShotTime = curretTime;
+			currentShooter++;
+		}
+	}
 
 	public void moveShip() {
 		player.move(player.getX() + shipMove, player.getY());
@@ -149,6 +161,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void startGame() {
 		objects.clear();
 		bullets.clear();
+		enemyBullets.clear();
 		dx = 1;
 		x = 0;
 		y = 50;
@@ -190,6 +203,10 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				bullets.remove(spaceObject);
 			}
 		}
+		if (currentShooter == 55){
+			currentShooter = 0;
+		}
+		enemyShoot(objects.get(currentShooter));
 		launchWeapon();
 		moveEverything();
 		checkForCollision();
@@ -207,6 +224,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public boolean gameOver() {
+		for (SpaceObject bullet:enemyBullets){
+			if (player.getRect().contains(bullet.getX(), bullet.getY())){
+				return true;
+			}
+		}
 		for (SpaceObject spaceEnemy : objects) {
 			if (!spaceEnemy.isDestroyed()) {
 				return false;
@@ -327,6 +349,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			}
 
 		}
+		for (SpaceObject spaceObject : enemyBullets) {
+			spaceObject.move(spaceObject.getX(), spaceObject.getY() + 5);
+			spaceObject.draw(g);	
+		}
+		enemyBullets.removeAll(toremove);
 		bullets.removeAll(toremove);
 		toremove.clear();
 	}
