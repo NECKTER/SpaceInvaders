@@ -31,10 +31,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private ArrayList<SpaceObject> toremove = new ArrayList<>();
 	private double shipMove = 0;
 	private int hold = 1;
-	private int shipStartSpeed = 2;
+	private int shipStartSpeed = 3;
 	private int shipAcceleration = 100;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
-	private int shootDelay = 333;//1000 = 1 second
+	private double lastShotTimeEnemy = System.currentTimeMillis();
+	private int shootDelay = 0;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 	private List<SpaceObject> enemyBullets = new ArrayList<SpaceObject>();
@@ -147,9 +148,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	
 	public void enemyShoot(SpaceObject shooter){
 		double curretTime = System.currentTimeMillis();
-		if ((curretTime - lastShotTime >= enemyShootDelay)) {
+		if ((curretTime - lastShotTimeEnemy >= enemyShootDelay)) {
 			enemyBullets.add(new SpaceObject(shooter.getX(), shooter.getY(), 15, 10, sheet.getBullet()));
-			lastShotTime = curretTime;
+			lastShotTimeEnemy = curretTime;
 			currentShooter++;
 		}
 	}
