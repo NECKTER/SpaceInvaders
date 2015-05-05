@@ -213,6 +213,14 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		else{
 			currentShooter++;
 		}
+		for (SpaceObject bullet: bullets){
+			for (SpaceObject enemyBullet: enemyBullets){
+				if (enemyBullet.getRect().contains(bullet.getX(), bullet.getY())){
+					toremove.add(bullet);
+					toremove.add(enemyBullet);
+				}
+			}
+		}
 		launchWeapon();
 		moveEverything();
 		checkForCollision();
