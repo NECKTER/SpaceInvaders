@@ -203,11 +203,14 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				bullets.remove(spaceObject);
 			}
 		}
-		if (objects.get(currentShooter).isDestroyed()){
-			currentShooter++;
-		}
 		if (currentShooter == 55){
 			currentShooter = 0;
+		}
+		if (!objects.get(currentShooter).isDestroyed()){
+			enemyShoot(objects.get(currentShooter));
+		}
+		else{
+			currentShooter++;
 		}
 		enemyShoot(objects.get(currentShooter));
 		launchWeapon();
