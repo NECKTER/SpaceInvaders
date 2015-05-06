@@ -31,11 +31,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private ArrayList<SpaceObject> toremove = new ArrayList<>();
 	private double shipMove = 0;
 	private int hold = 1;
-	private int shipStartSpeed = 3;
+	private int shipStartSpeed = 4;
 	private int shipAcceleration = 100;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private double lastShotTimeEnemy = System.currentTimeMillis();
-	private int shootDelay = 0;//1000 = 1 second
+	private int shootDelay = 333;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 	private List<SpaceObject> enemyBullets = new ArrayList<SpaceObject>();
@@ -143,7 +143,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void launchWeapon() {
 		double curretTime = System.currentTimeMillis();
 		if ((curretTime - lastShotTime >= shootDelay) && shooting) {
-			bullets.add(new SpaceObject(player.getX(), player.getY(), 15, 10, sheet.getBullet()));
+			bullets.add(new SpaceObject(player.getX() + 8, player.getY(), 15, 10, sheet.getBullet()));
 			lastShotTime = curretTime;
 		}
 	}
@@ -360,9 +360,9 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			for (int i = 0; i < PlayerLives; i++) {
 				g.drawImage(sheet.getPlayer(), 0 + (i * 27), 0, 25, 25, this);
 			}
+			g.setColor(Color.GREEN);
+			g.drawString(new String("Score: " + score), 100, 25);
 		}
-		g.setColor(Color.GREEN);
-		g.drawString(new String("Score: " + score), 100, 25);
 
 	}
 
