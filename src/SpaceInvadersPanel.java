@@ -251,6 +251,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public String gameOver() {
 		for (SpaceObject bullet : enemyBullets) {
 			if (player.getRect().contains(bullet.getX(), bullet.getY())) {
+				enemyBullets.remove(bullet);
 				return "playerHit";
 			}
 		}
