@@ -45,6 +45,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int enemyShootDelay = 750;
 	int currentShooter = 0;
 	int PlayerLives = 3;
+	private int score = 0;
 
 	//to do listbullets
 	//enemy shoot
@@ -242,6 +243,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			if (enemy.isDestroyed() && !destroyed.contains(enemy)) {
 				destroyed.add(enemy);
 				enemiesDestroyed++;
+				score += 5;
 			}
 		}
 	}
@@ -359,6 +361,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				g.drawImage(sheet.getPlayer(), 0 + (i * 27), 0, 25, 25, this);
 			}
 		}
+		g.setColor(Color.GREEN);
+		g.drawString(new String("Score: " + score), 100, 25);
 
 	}
 
