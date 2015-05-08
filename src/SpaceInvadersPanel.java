@@ -35,7 +35,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipAcceleration = 100;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private double lastShotTimeEnemy = System.currentTimeMillis();
-	private int shootDelay = 0;//1000 = 1 second
+	private int shootDelay = 333;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 	private List<SpaceObject> enemyBullets = new ArrayList<SpaceObject>();
@@ -166,6 +166,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void startGame() {
+		enemyShootDelay = 750;
 		objects.clear();
 		bullets.clear();
 		enemyBullets.clear();
@@ -248,6 +249,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				destroyed.add(enemy);
 				enemiesDestroyed++;
 				score += 5;
+				enemyShootDelay -= 10;
 			}
 		}
 	}
