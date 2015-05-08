@@ -46,6 +46,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	int currentShooter = 0;
 	int PlayerLives = 3;
 	private int score = 0;
+	private int[] shieldX;
+	private int[] shieldY;
 
 	//to do listbullets
 	//enemy shoot
@@ -58,6 +60,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		gameTimer = new Timer(1, this);
 		setUpBindings();
 		SpaceObject.panel = this;
+		shieldX = new int[100];
+		shieldY = new int[100];
 	}
 
 	private void setUpBindings() {
@@ -361,6 +365,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			enemyAnimation(g);
 			playerAnimation(g);
 			bulletAnimation(g);
+			shieldAnimation(g);
 			for (int i = 0; i < PlayerLives; i++) {
 				g.drawImage(sheet.getPlayer(), 0 + (i * 27), 0, 25, 25, this);
 			}
@@ -368,6 +373,11 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 			g.drawString(new String("Score: " + score), 100, 25);
 		}
 
+	}
+	
+	private void shieldAnimation(Graphics g) {
+		// TODO Auto-generated method stub
+		g.drawPolygon(shieldX, shieldY, shieldX.length);
 	}
 
 	private void bulletAnimation(Graphics g) {
