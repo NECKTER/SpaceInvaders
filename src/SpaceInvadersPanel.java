@@ -216,13 +216,12 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				bullets.remove(spaceObject);
 			}
 		}
-		if (currentShooter == 55) {
-			currentShooter = 0;
+		currentShooter = nextShooter();
+		while (objects.get(currentShooter).isDestroyed()) {
+			currentShooter = nextShooter();
 		}
 		if (!objects.get(currentShooter).isDestroyed()) {
 			enemyShoot(objects.get(currentShooter));
-		} else {
-			currentShooter++;
 		}
 		for (SpaceObject bullet : bullets) {
 			for (SpaceObject enemyBullet : enemyBullets) {
@@ -392,5 +391,13 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		enemyBullets.removeAll(toremove);
 		bullets.removeAll(toremove);
 		toremove.clear();
+	}
+
+	private int nextShooter() {
+		int temp = (int) (Math.random() * 55);
+		while (temp > 54)
+			temp = (int) (Math.random() * 55);
+		return temp;
+
 	}
 }
