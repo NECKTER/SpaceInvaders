@@ -304,7 +304,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				moveDown = true;
 				break;
 			}
-			if (spaceObject.getY() > player.getY()){
+			if (spaceObject.getY() > player.getY() && !spaceObject.isDestroyed()){
 				gameTimer.stop();
 			}
 		}
