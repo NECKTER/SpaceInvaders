@@ -162,6 +162,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	}
 
 	public void startGame() {
+		score = 0;
 		objects.clear();
 		bullets.clear();
 		enemyBullets.clear();
