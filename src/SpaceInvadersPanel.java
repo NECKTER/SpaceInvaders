@@ -50,7 +50,6 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int[] shieldY;
 
 	//to do listbullets
-	//enemy shoot
 	//music
 	//Obstacles
 
@@ -309,7 +308,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				moveDown = true;
 				break;
 			}
-			if (spaceObject.getY() > player.getY() && !spaceObject.isDestroyed()){
+			if (spaceObject.getY() > player.getY() && !spaceObject.isDestroyed()) {
 				gameTimer.stop();
 			}
 		}
@@ -376,7 +375,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		}
 
 	}
-	
+
 	private void shieldAnimation(Graphics g) {
 		// TODO Auto-generated method stub
 		g.drawPolygon(shieldX, shieldY, shieldX.length);
