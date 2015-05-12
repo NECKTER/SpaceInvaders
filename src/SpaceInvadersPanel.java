@@ -12,7 +12,6 @@ import java.util.List;
 import java.awt.Point;
 
 import javax.swing.AbstractAction;
-import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -40,7 +39,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int shipAcceleration = 100;//larger is slower
 	private double lastShotTime = System.currentTimeMillis();
 	private double lastShotTimeEnemy = System.currentTimeMillis();
-	private int shootDelay = 0;//1000 = 1 second
+	private int shootDelay = 333;//1000 = 1 second
 	private int enemiesDestroyed = 0;
 	private List<SpaceObject> destroyed = new ArrayList<SpaceObject>();
 	private List<SpaceObject> enemyBullets = new ArrayList<SpaceObject>();
@@ -53,9 +52,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	private int score = 0;
 	private int[] shieldX;
 	private int[] shieldY;
-	private java.applet.AudioClip shoot;
-	private java.applet.AudioClip enemyDeath;
-	private java.applet.AudioClip playerDeath;
+	private ClipPlayer sound = new ClipPlayer();
 
 	//to do listbullets
 	//music
@@ -69,14 +66,8 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		SpaceObject.panel = this;
 		shieldX = new int[100];
 		shieldY = new int[100];
-		try {
-			shoot = java.applet.Applet.newAudioClip(new File("sounds/shoot.wav").toURI().toURL());
-			playerDeath = java.applet.Applet.newAudioClip(new File("sounds/explosion.wav").toURI().toURL());
-			enemyDeath = java.applet.Applet.newAudioClip(new File("sounds/invaderkilled.wav").toURI().toURL());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sound.mapFile("shoot", "shoot.wav");
+		sound.mapFile("edeath", "invaderkilled.wav");
 	}
 
 	private void setUpBindings() {
@@ -164,7 +155,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		if ((curretTime - lastShotTime >= shootDelay) && shooting) {
 			bullets.add(new SpaceObject(player.getX() + 8, player.getY(), 15, 10, sheet.getBullet()));
 			lastShotTime = curretTime;
-			shoot.play();
+			sound.play("shoot");
 		}
 	}
 
@@ -408,6 +399,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 				if (!spaceEnemy.isDestroyed() && spaceEnemy.getRect().contains(spaceObject.getX(), spaceObject.getY())) {
 					toremove.add(spaceObject);
 					spaceEnemy.destroy();
+					sound.play("edeath");
 				}
 			}
 
