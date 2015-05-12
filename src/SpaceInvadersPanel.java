@@ -68,6 +68,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 		shieldY = new int[100];
 		sound.mapFile("shoot", "shoot.wav");
 		sound.mapFile("edeath", "invaderkilled.wav");
+		sound.mapFile("pdeath", "explosion.wav");
 	}
 
 	private void setUpBindings() {
@@ -212,6 +213,7 @@ public class SpaceInvadersPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (gameOver().equals("playerHit")) {
 			PlayerLives--;
+			sound.play("pdeath");
 			player.move(500, 750);
 		}
 		if (gameOver().equals("enemygone")) {
